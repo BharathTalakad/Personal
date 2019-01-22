@@ -57,12 +57,12 @@
 			isa = PBXGroup;
 			children = (
 				8E8B9A8021F6F86A0049C8DD /* AppDelegate.swift */,
-				8E8B9A8221F6F86A0049C8DD /* art.scnassets */,
 				8E8B9A8421F6F86A0049C8DD /* ViewController.swift */,
 				8E8B9A8621F6F86A0049C8DD /* Main.storyboard */,
 				8E8B9A8921F6F86B0049C8DD /* Assets.xcassets */,
 				8E8B9A8B21F6F86B0049C8DD /* LaunchScreen.storyboard */,
 				8E8B9A8E21F6F86B0049C8DD /* Info.plist */,
+				8E8B9A8221F6F86A0049C8DD /* art.scnassets */,
 			);
 			path = ARDicee;
 			sourceTree = "<group>";
