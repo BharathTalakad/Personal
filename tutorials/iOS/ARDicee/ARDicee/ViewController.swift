@@ -44,14 +44,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.autoenablesDefaultLighting = true
         
 //        Xcode generated default code
-//        // Create a new scene
-//        let diceScene = SCNScene(named: "art.scnassets/diceCollada.scn")!
-//
-//        if let diceNode = diceScene.rootNode.childNode(withName: "Dice", recursively: true){
-//
-//        diceNode .position = SCNVector3(0, 0, -0.1)
-//
-//        sceneView.scene.rootNode.addChildNode(diceNode)
+
 //        }
         
 
@@ -64,12 +57,34 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             //hit test to correspond 2d touch position to a 3d position
             let results = sceneView.hitTest(touchLocation, types: .existingPlaneUsingExtent)
             
-            if !results.isEmpty {
-                print("Touched plane")
+            if let hitResult = results.first {
+             
+                //        // Create a new scene
+                let diceScene = SCNScene(named: "art.scnassets/diceCollada.scn")!
+        
+                if let diceNode = diceScene.rootNode.childNode(withName: "Dice", recursively: true){
+        
+                diceNode .position = SCNVector3(
+                    hitResult.worldTransform.columns.3.x,
+                    hitResult.worldTransform.columns.3.y  + diceNode.boundingSphere.radius ,
+                    hitResult.worldTransform.columns.3.z)
+        
+                sceneView.scene.rootNode.addChildNode(diceNode)
+                    
+                    
+                    
+                let randomX = Float(arc4random_uniform(4) + 1) * (Float.pi/2)
+                let randomz = Float(arc4random_uniform(4) + 1) * (Float.pi/2)
+                    
+                diceNode.runAction(
+                    SCNAction.rotateBy(
+                        x: CGFloat(randomX * 5),
+                        y: CGFloat(0),
+                        z: CGFloat(randomz * 5),
+                        duration: 0.5)
+                    )
             }
-            else{
-                print("Touched somewhere else")
-            }
+        }
         }
     }
     
