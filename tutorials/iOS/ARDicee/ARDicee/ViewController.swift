@@ -51,6 +51,15 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
 
     }
+    @IBAction func removeAllDice(_ sender: UIBarButtonItem) {
+        
+        if !diceArray.isEmpty {
+            for dice in diceArray{
+                dice.removeFromParentNode()
+            }
+        }
+        
+    }
     
     
     @IBAction func rollAgain(_ sender: UIBarButtonItem) {
