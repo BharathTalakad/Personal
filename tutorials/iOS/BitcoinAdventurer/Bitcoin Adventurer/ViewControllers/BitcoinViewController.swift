@@ -70,36 +70,9 @@ internal class BitcoinViewController: UIViewController {
   }
   
   private func requestPrice()  {
-//    let bitcoin = Coinbase.bitcoin.path
-//    // 1. Make URL request
-//    guard let url = URL(string: bitcoin) else { return }
-//    var request = URLRequest(url: url)
-//    request.cachePolicy = .reloadIgnoringCacheData
-//
-//    // 2. Make networking request
-//    let task = URLSession.shared.dataTask(with: request) { data, _, error in
-    
-//    networking.request(from: Coinbase.bitcoin) { (data, error) in
-//      // 3. Check for errors
-//      if let error = error {
-//        print("Error received requesting Bitcoin price: \(error.localizedDescription)")
-//        return
-//      }
-//      // 4. Parse the returned information
-//      let decoder = JSONDecoder()
-//
-//      guard let data = data,
-//        let response = try? decoder.decode(PriceResponse.self,
-//                                           from: data) else { return }
-//
-//      print("Price returned: \(response.data.amount)")
-    
     fetcher.fetch{ response in
       guard let response = response else { return }
       
-      
-    
-
       // 5. Update the UI with the parsed PriceResponse
       DispatchQueue.main.async { [weak self] in
         self?.updateLabel(price: response.data)

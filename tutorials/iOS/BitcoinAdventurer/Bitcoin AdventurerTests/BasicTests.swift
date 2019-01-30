@@ -39,6 +39,23 @@ class BasicTests: XCTestCase {
   
   override func setUp() {
     super.setUp()
+    // 1
+    container.register(Currency.self) { _ in .USD }
+    container.register(CryptoCurrency.self) { _ in .BTC }
+    
+    // 2
+    container.register(Price.self) { resolver in
+      let crypto = resolver.resolve(CryptoCurrency.self)!
+      let currency = resolver.resolve(Currency.self)!
+      return Price(base: crypto, amount: "999456", currency: currency)
+    }
+    
+    // 3
+    container.register(PriceResponse.self) { resolver in
+      let price = resolver.resolve(Price.self)!
+      return PriceResponse(data: price, warnings: nil)
+    }
+    
   }
   
   override func tearDown() {
@@ -49,7 +66,11 @@ class BasicTests: XCTestCase {
   // MARK: - Tests
   
   func testPriceResponseData() {
-    XCTFail("Test not yet written.")
+    
+    let response = container.resolve(PriceResponse.self)!
+    XCTAssertEqual(response.data.amount, "999456")
+    
+    
   }
   
 }
